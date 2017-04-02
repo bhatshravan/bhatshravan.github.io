@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <title>PDF417 - 2D Barcode generator test</title>
+      <script src="js/bcmath-min.js" type="text/javascript"></script>
+      <script src="js/pdf417-min.js" type="text/javascript"></script>       
+      <link rel="stylesheet" href="css/style.css" />
+      <srcipt type="text/javascript"  src="js/p.js"></srcipt>
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="js/checkdigit.js" type="text/javascript"></script>
+      <script>  
+         window.onload = function() { 
+         
+             
+         
+              var textToEncode = document.getElementById("rname");
+         
+             console.log(textToEncode.value)
+         
+             PDF417.init(textToEncode.value);          
+         
+             var barcode = PDF417.getBarcodeArray();
+         
+             // block sizes (width and height) in pixels
+             var bw = 2;
+             var bh = 2;
+         
+             // create canvas element based on number of columns and rows in barcode
+             var canvas = document.createElement('canvas');
+             canvas.width = bw * barcode['num_cols'];
+             canvas.height = bh * barcode['num_rows'];
+             document.getElementById('barcode').appendChild(canvas);
+         
+             var ctx = canvas.getContext('2d');                    
+         
+             // graph barcode elements
+             var y = 0;
+             // for each row
+             for (var r = 0; r < barcode['num_rows']; ++r) {
+                 var x = 0;
+                 // for each column
+                 for (var c = 0; c < barcode['num_cols']; ++c) {
+                     if (barcode['bcode'][r][c] == 1) {                        
+                         ctx.fillRect(x, y, bw, bh);
+                     }
+                     x += bw;
+                 }
+                 y += bh;
+             }            
+         }
+         function ValidateEmail(remail)   
+{  
+  if(remail==='')
+    return true
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(remail))  
+  {  
+    return (true)  
+  }  
+    
+    return (false)  
+} 
+
+
+function validatezip(zipn){
+   var zipno = /^\d{6}$/;
+   if(zipn.match(zipno)){
+    return true
+   } 
+   return false
+
+
+}
+function phonenumber(rphone)  
+{  
+  var phoneno = /^\d{10}$/;  
+  if(rphone==='')
+    return true
+  if(rphone.match(phoneno))  
+        {  
+      return true;  
+        }  
+      else  
+        {  
+        return false;  
+        }  
+} 
+         function generate() {
+         phonenumber
+             
+             var rname= document.getElementById("rname");
+             var remail=document.getElementById("remail") 
+             var rzip=document.getElementById("rzip")
+             var szip=document.getElementById('szip')
+             var rphone=document.getElementById("rphone")
+             var sname=document.getElementById("sname")
+             var sphone=document.getElementById("sphone")
+             var raddr=document.getElementById("raddr")
+             var mailproducts=document.getElementById("products")
+                     
+         
+             if(rname.value!==''  || rzip.value!=='' || sname.value!=='' ||  raddr.value!=='' || mailproducts.selectedIndex!==0){
+
+              var linearcode=checkdigit(mailproducts.selectedIndex)
+
+           
+             if(!phonenumber(rphone.value) || !phonenumber(sphone.value)){
+               alert('Please enter the right Phone number')
+               return false
+             }
+             if(!ValidateEmail(remail.value) || !ValidateEmail(semail.value))
+             {
+                alert('Enter Right email id')
+                return false
+             }
+
+             if(!validatezip(rzip.value) || !validatezip(szip.value)){
+                alert('Enter Xorrect Zip')
+                return false
+             }
+ 
+         
+             var result='0;;'
+             result=result+linearcode+';;'
+             result=result+rzip.value+';;'
+             result=result+rname.value+ ';;'
+             result=result+remail.value+';;'
+             result=result+rphone.value+';;'
+             result=result+sname.value+';;'
+             result=result+sphone.value+';;'
+             result=result+raddr.value+';;'
+             result=result+mailproducts.options[mailproducts.selectedIndex].text         
+         
+             PDF417.init(result);             
+         
+             var barcode = PDF417.getBarcodeArray();
+         
+             // block sizes (width and height) in pixels
+             var bw = 2;
+             var bh = 2;
+         
+             // create canvas element based on number of columns and rows in barcode
+             var container = document.getElementById('barcode');
+             container.removeChild(container.firstChild);
+             
+         
+         
+         
+             var canvas = document.createElement('canvas');
+         
+             canvas.width = bw * barcode['num_cols'];
+             canvas.height = bh * barcode['num_rows'];
+             container.appendChild(canvas);
+         
+         
+         
+             var ctx = canvas.getContext('2d'); 
+
+             
+               
+         
+             // graph barcode elements
+             var y = 0;
+             // for each row
+             for (var r = 0; r < barcode['num_rows']; ++r) {
+                 var x = 0;
+                 // for each column
+                 for (var c = 0; c < barcode['num_cols']; ++c) {
+                     if (barcode['bcode'][r][c] == 1) {                        
+                         ctx.fillRect(x, y, bw, bh);
+                     }
+                     x += bw;
+                 }
+                 y += bh;
+             } 
+
+             var canvas2=container.appendChild(document.createElement('canvas'))
+
+             
+             var ctx2 = canvas2.getContext("2d");
+             ctx2.font = "20px Arial";
+             ctx2.fillText(rzip.value,80,30);
+         
+             container.appendChild(canvas2)
+
+      
+
+  
+         
+               return true
+             }
+         
+         
+             return false
+             
+         
+         
+         }
+         
+         
+         
+             
+         
+      </script>
+   </head>
+   <body>
+      <header>
+         <div class="container">
+            <span id="menu-btn"></span>
+            <div class="row">
+               <div class="col-md-3">
+                  <!-- logo begin -->
+                  <div id="logo">
+                     <div class="inner">
+                        <a href="index.html">
+                           <h1>INDIA POST </h1>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4"></div>
+               <div class="col-md-3">
+                  <h2>BIT HACKERS</h2>
+               </div>
+               <div class="col-md-2">
+                  <div class="search text-right">
+                     <input type="text" name="search" id="search" placeholder="search">
+                     <button type="submit" class="btn-search-icon">
+                     <i class="fa fa-search"></i>
+                     </button>
+                  </div>
+                  <!-- social icons close -->
+               </div>
+            </div>
+         </div>
+      </header>
+      <div id="content" class="no-padding">
+      <!-- section begin -->
+      <section id="section-welcome" class="no-padding autoheight light-text" >
+         <div id="overlay">
+            <video class="visible-desktop" id="hero-vid" poster="http://www.markhillard.com/sandbox/media/polina.jpg" autoplay loop muted>
+               <source type="video/mp4" src="video.mov"></source>
+            </video>
+         </div>
+         <div class="center-y" style="padding-top: 208px;">
+            <div class="inner">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <h1 class="text-ultra-big wow fadeInRight" data-wow-duration="1.5s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInRight;">
+                           <span class="id-color">Vision</span><br>
+                           India Post's Products And Services Will Be The <br/> Customer's First Choice.​
+                        </h1>
+                        <a href="#form" id="barcodebutton" class="btn btn-custom wow fadeInUp" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s; animation-name: fadeInUp;">Generate Bar Code</a>
+                     </div>
+                     <div class="divider-double"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- section close -->
+      <section class="no-padding mt-90 height90px bg111111 mobile-hide">
+         <div class="container">
+            <div class="row-fluid">
+               <div class="col-md-4">
+                  <div class="info-box padding20">
+                     <i class="fa fa-clock-o"></i>
+                     <div class="info-box_text">
+                        <div class="info-box_title">Opening Times</div>
+                        <div class="info-box_subtite">Monday - Friday: 12:00-12:30</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="info-box padding20">
+                     <i class="fa fa-home"></i>
+                     <div class="info-box_text">
+                        <div class="info-box_title">Our Location</div>
+                        <div class="info-box_subtite">Bangalore</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="info-box padding20">
+                     <i class="fa fa-phone"></i>
+                     <div class="info-box_text">
+                        <div class="info-box_title">Our Phone</div>
+                        <div class="info-box_subtite">011 2565 2829</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4"></div>
+            </div>
+         </div>
+      </section>
+      <section class="padding20" id="scroll" style="background:#000"></section> 
+      <section id ="form" class="no-padding">
+         <div class="container-fluid">
+            <div class="row wrapper">
+               <div class="col-md-5"></div>
+               <div class="col-lg-6">
+                  <h2>Bar Code Generation</h2>
+               </div>
+               <div class="col-lg-1">
+               </div>
+            </div>
+         </div>   
+      </section>
+      <section id="section-contact-form">
+      <div style="margin-top:-60px" class="container-fluid" >
+      <div class="row"  >
+      <div  style="background:#000" class="col-md-12 "  >
+      <div class="col-md-3 padding20">
+      <input type="text" class="form-control" name="name" id="rname" placeholder="Reciepient Name*"></div>
+      <div class="col-md-3 padding20">
+      <!--  <div id="error_email" class="error">Please check your email</div> -->
+      <input type="text" class="form-control" name="email" id="remail" placeholder="Reciepient Email">
+      </div>
+      <div class="col-md-3 padding20">
+      <input type="text" class="form-control" name="name" id="sname" placeholder="Senders Name*"></div>
+      <div class="col-md-3 padding20">
+      <!--  <div id="error_email" class="error">Please check your email</div> -->
+      <input type="text" class="form-control" name="email" id="semail" placeholder="Senders Email"> </div>
+      <div class="col-md-3 padding20">
+      <!--  <div id="error_email" class="error">Please check your email</div> -->
+      <input type="text" class="form-control" name="email" id="rphone" placeholder="Reciepient Phone"> </div>
+      <div class="col-md-3 padding20">
+      <!--  <div id="error_email" class="error">Please check your email</div> -->
+      <input type="text" class="form-control" name="email" id="rzip" placeholder="Reciepient Zip Code*"> </div>
+      <div class="col-md-3 padding20">
+      <!--  <div id="error_email" class="error">Please check your email</div> -->
+      <input type="text" class="form-control" name="email" id="sphone" placeholder="Senders Phone"> </div>
+      <div class="col-md-3 padding20">
+      <!--  <div id="error_email" class="error">Please check your email</div> -->
+      <input type="text" class="form-control" name="email" id="szip" placeholder=" Senders Zip Code*"> </div>
+      <div class="col-md-6 padding20" >
+      <textarea cols="10" rows="5" name="message" id="raddr" class="form-control" placeholder="Reciepient Address"></textarea>
+      </div>
+      <div class="col-md-6 padding20" >
+      <select name="mailproducts" placeholder="mailproducts" class="form-control" id="products">
+      <option value="empty">---Select Mail Products---</option>
+      <option values="LP">Letter Post</option>
+      <option value="PP">Parcel Post</option>
+      <option value="RP">Registered Post</option>
+      <option value="SP">Speed Post</option>
+      </select> 
+      </div>
+      <div class="col-md-12 padding20">
+      <input type="submit" id="Generate" value="Generate" class="btn btn-custom fullwidth">
+      </div>
+      <div class="col-md-12 fullwidth" style="background-color:#000; height:250px" ></div>
+    
+
+      </div>
+      
+      </div>
+      </div>
+      </section>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Bar Code</h4>
+      </div>
+      <div class="modal-body">
+            <div  class="col-md-6"  style="background-color: white" id="barcode"></div>
+      </div>
+      <div class="modal-footer">
+           <input type="submit" class="btn btn-custom" value="Print" id="print"  />
+      </div>
+      </div>
+      </div>
+      </div>
+      <!-- section begin -->
+      <!-- section close -->
+      <!-- section begin -->
+      <!-- section close -->
+      <!-- section begin -->
+      <!-- section close -->
+      <!-- section begin -->
+      <!-- section close -->
+      <!-- section begin -->
+      <!-- section close -->
+      <!-- section begin -->
+      <!-- section begin -->
+      <!-- section close -->
+      </div>
+      <script>
+    $(function(){
+         
+           
+         
+            $("#barcodebutton").click(function() {
+               $('html,body').animate({
+                  scrollTop: $("#scroll").offset().top},
+                 'slow');
+             });
+
+
+
+             $('#Generate').on('click',function(){
+         
+             
+             if(generate()){
+                 $("#myModal").modal();
+                   
+               }
+           })
+
+
+         $('#print').on('click',function(){
+            console.log('Inside print')
+            window.Print()
+         })
+         
+         
+     })
+         
+         
+         
+         
+         
+
+    
+         
+         
+          
+           
+      </script>
+   </body>
+</html>
