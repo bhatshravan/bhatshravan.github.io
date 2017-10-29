@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>PDF417 - 2D Barcode generator test</title>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='https://cdnjs.com/libraries/1000hz-bootstrap-validator'></script>
+
+    <script src="bcmath-min.js" type="text/javascript"></script>
+    <script src="pdf417-min.js" type="text/javascript"></script>
+
+    <script>
+        window.onload = function() {
+
+
+            var hub3_code = "HRVHUB30\nHRK\n" +
+                "000000000012355\n" +
+                "ZELJKO SENEKOVIC\n" +
+                "42000 VARAZDIN\n" +
+                "2DBK d.d.\n" +
+                "ALKARSKI PROLAZ 13B\n" +
+                "21230 SINJ\n" +
+                "HR1210010051863000160\n" +
+                "HR01\n" +
+                "7269-68949637676-00019\n" +
+                "COST\n" +
+                "Troskovi za 1. mjesec\n";
+
+            var nid = "yo";
+            var o = "";
+
+            //console.log("NAME: "+$("#name").val());
+            //console.log($("#textToEncode").text());
+
+
+            var textToEncode = document.getElementById("textToEncode");
+            textToEncode.value = o;
+            var nameid = document.getElementById("name");
+            nameid.value = o;
+            var usid = document.getElementById("upsc");
+            usid.value = o;
+            var zid = document.getElementById("zippr");
+            zid.value = o;
+            var pinid = document.getElementById("pin");
+            pinid.value = o;
+
+            PDF417.init(o);
+
+            var barcode = PDF417.getBarcodeArray();
+
+            // block sizes (width and height) in pixels
+            var bw = 2;
+            var bh = 2;
+
+            // create canvas element based on number of columns and rows in barcode
+            var canvas = document.createElement('canvas');
+            canvas.width = bw * barcode['num_cols'];
+            canvas.height = bh * barcode['num_rows'];
+            document.getElementById('barcode').appendChild(canvas);
+
+            var ctx = canvas.getContext('2d');
+
+            // graph barcode elements
+            var y = 0;
+            // for each row
+            for (var r = 0; r < barcode['num_rows']; ++r) {
+                var x = 0;
+                // for each column
+                for (var c = 0; c < barcode['num_cols']; ++c) {
+                    if (barcode['bcode'][r][c] == 1) {
+                        ctx.fillRect(x, y, bw, bh);
+                    }
+                    x += bw;
+                }
+                y += bh;
+            }
+        }
+
+        function generate() {
+
+
+            var add = document.getElementById("textToEncode");
+            var nameid = document.getElementById("name");
+            var usid = document.getElementById("upsc");
+            var zid = document.getElementById("zippr");
+            var pinid = document.getElementById("pin");
+
+            var s = nameid.value;
+            var q = add.value;
+            var l = usid.value;
+            var m = zid.value;
+            var n = pinid.value;
+
+            var q1 = "\n ADDRESS:";
+            var s1 = "\n Name:";
+            var l1 = "\n UPSC:";
+            var m1 = "\n Aadhar:";
+            var n1 = "\n PIN:";
+
+            s = s1.concat(s);
+            q = q1.concat(q);
+            l = l1.concat(l);
+            m = m1.concat(m);
+            n = n1.concat(n);
+
+            var fina = s.concat(q, l, m, n);
+            PDF417.init(fina);
+
+            var barcode = PDF417.getBarcodeArray();
+
+            // block sizes (width and height) in pixels
+            var bw = 5;
+            var bh = 2;
+
+            // create canvas element based on number of columns and rows in barcode
+            var container = document.getElementById('barcode');
+            container.removeChild(container.firstChild);
+
+            var canvas = document.createElement('canvas');
+            canvas.width = bw * barcode['num_cols'];
+            canvas.height = bh * barcode['num_rows'];
+            container.appendChild(canvas);
+
+            var ctx = canvas.getContext('2d');
+
+            // graph barcode elements
+            var y = 0;
+            // for each row
+            for (var r = 0; r < barcode['num_rows']; ++r) {
+                var x = 0;
+                // for each column
+                for (var c = 0; c < barcode['num_cols']; ++c) {
+                    if (barcode['bcode'][r][c] == 1) {
+                        ctx.fillRect(x, y, bw, bh);
+                    }
+                    x += bw;
+                }
+                y += bh;
+            }
+        }
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <center>
+
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> 
+                    </button>
+                        <a class="navbar-brand" href="#">BITHACKERS</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class=""><a href="../index.html">Home</a></li>
+                            <li class=""><a href="../reader.html">Postcode reader</a></li>
+                            <li class="active"><a href="ppp/b2.html">Generator</a></li>
+                            <li class=""><a href="log.php">Logs</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!--target="_blank"-->
+
+            <p>
+                <h1>Text to encode</h1>
+            </p>
+            <hr>
+            <form data-toggle="validator" action="n.php" method="post">
+
+                <div class="form-group input-group input-group-lg"> <label for="inpName" class="control-label">Name: </label><input type="text" id="name" placeholder="Name" name="name" class="form-control"></input>
+                </div><br/>
+                <label>ADDRESS:</label><br><input type="text" id="textToEncode" style="width: 40%; height: 100px;" name="textToEncode" placeholder="Address" required></input><br><br>
+                <label>UPSC:</label> <input type="text" id="upsc" placeholder="UPSC code" name="upsc"></input><br><br>
+                <label> Aadhar:</label> <input type="text" id="zippr" placeholder="Aadhar" name="zippr"></input><br><br>
+                <label>Pin:</label> <input type="number" data-minlength="6" data-maxlength="6" id="pin" placeholder="6 DIGIT PIN" name="pin" data-error="INPUT PIN PLEASE" required></input><br><br>
+                <p>&nbsp;<button id="pint" class="btn btn-primary" type="Submit">PRINT</button></p>
+            </form>
+            <button onclick="generate()" id="genbutton" class="btn btn-primary">Generate</button>
+
+            <div id="barcode"></div>
+        </div>
+    </center>
+</body>
+
+</html>

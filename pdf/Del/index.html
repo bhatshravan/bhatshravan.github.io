@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>PDF417 - 2D Barcode generator test</title>
+
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <script src='../../bootstrap/jquery-3.1.1.min.js'></script>
+    <!--script src='../../bootstrap/validator.js'></script-->
+
+    <script src="bcmath-min.js" type="text/javascript"></script>
+    <script src="pdf417.js" type="text/javascript"></script>
+
+    <script>
+        window.onload = function() {
+
+
+             var nid = "yo";
+            var o = "";
+
+            //console.log("NAME: "+$("#name").val());
+            //console.log($("#textToEncode").text());
+
+
+            var textToEncode = document.getElementById("addr");
+                  PDF417.init(o);
+
+            var barcode = PDF417.getBarcodeArray();
+
+            // block sizes (width and height) in pixels
+            var bw = 2;
+            var bh = 2;
+
+            // create canvas element based on number of columns and rows in barcode
+            var canvas = document.createElement('canvas');
+            canvas.width = bw * barcode['num_cols'];
+            canvas.height = bh * barcode['num_rows'];
+            document.getElementById('barcode').appendChild(canvas);
+
+            var ctx = canvas.getContext('2d');
+
+            // graph barcode elements
+            var y = 0;
+            // for each row
+            for (var r = 0; r < barcode['num_rows']; ++r) {
+                var x = 0;
+                // for each column
+                for (var c = 0; c < barcode['num_cols']; ++c) {
+                    if (barcode['bcode'][r][c] == 1) {
+                        ctx.fillRect(x, y, bw, bh);
+                    }
+                    x += bw;
+                }
+                y += bh;
+            }
+        }
+
+        function generate() {
+
+
+            var add = document.getElementById("addr");
+            var nameid = document.getElementById("name");
+            var usid = document.getElementById("upsc");
+            var zid = document.getElementById("zippr");
+            var pinid = document.getElementById("pin");
+            var tid = document.getElementById("tel");
+            /*    if (document.getElementById('cod').checked) {
+                //Male radio button is checked
+                console.log("CODA");
+            } else if (document.getElementById('st').checked) {
+                //Female radio button is checked
+                console.log("stp");
+            } else if (document.getElementById('sp').checked) {
+                //Female radio button is checked
+                console.log("sp");
+            }
+*/
+            var s = nameid.value;
+            var q = add.value;
+            var l = usid.value;
+            var m = zid.value;
+            var n = pinid.value;
+            var mm = tid.value;
+
+            var q1 = "\n ADDRESS:";
+            var s1 = "\n Name:";
+            var l1 = "\n UPU:";
+            var m1 = "\n Type:";
+            var n1 = "\n PIN:";
+            var j1 = "\n Tel:";
+
+            s = s1.concat(s);
+            q = q1.concat(q);
+            l = l1.concat(l);
+            m = m1.concat(m);
+            n = n1.concat(n);
+            j = j1.concat(mm);
+
+            var fina = s.concat(q, l, m, n, j);
+            console.log(fina);
+            PDF417.init(fina);
+
+            var barcode = PDF417.getBarcodeArray();
+
+            // block sizes (width and height) in pixels
+            var bw = 5;
+            var bh = 2;
+
+            // create canvas element based on number of columns and rows in barcode
+            var container = document.getElementById('barcode');
+            container.removeChild(container.firstChild);
+
+            var canvas = document.createElement('canvas');
+            canvas.width = bw * barcode['num_cols'];
+            canvas.height = bh * barcode['num_rows'];
+            container.appendChild(canvas);
+
+            var ctx = canvas.getContext('2d');
+
+            // graph barcode elements
+            var y = 0;
+            // for each row
+            for (var r = 0; r < barcode['num_rows']; ++r) {
+                var x = 0;
+                // for each column
+                for (var c = 0; c < barcode['num_cols']; ++c) {
+                    if (barcode['bcode'][r][c] == 1) {
+                        ctx.fillRect(x, y, bw, bh);
+                    }
+                    x += bw;
+                }
+                y += bh;
+            }
+        }
+    </script>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <center>
+
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> 
+                    </button>
+                        <a class="navbar-brand" href="#">BITHACKERS</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class=""><a href="../index.html">Home</a></li>
+                            <!--li class=""><a href="../reader.html">Postcode reader</a></li-->
+                            <li class="active"><a href="#">Generator</a></li>
+                            <li class=""><a href="../ppp/b3.html">Offline Generator</a></li>
+                            <li class=""><a href="index.html">Del Home</a></li>
+                            <li class=""><a href="info null.php">Info null</a></li>
+                            <li class=""><a href="del-updater.html">Updater</a></li>
+                            <li class=""><a href="info getter.php">Getter</a></li>
+                            <li class=""><a href="delivery.html">Delivery</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!--target="_blank"-->
+
+            <p>
+                <h1>Text to encode</h1>
+            </p>
+            <hr>
+            <form data-toggle="validator" action="m.php" method="post">
+
+                <div class="form-group input-group input-group-lg ">
+                    <label for="inpName " class="control-label ">Delivery incharge phone: </label>
+                    <input type="number" id="name" placeholder="Delivery incharge " name="name" class="form-control ">
+                    </input>
+                </div>
+                <br/>
+                <label>UID:</label> <input type="text " id="uid" placeholder="ID " name="uid"></input><br><br>
+                <label>FROM:</label><br><input type="text" id="from" style="width: 40%; height: 100px; " name="from" placeholder="From Address " required></input><br><br>
+                <label>TO:</label> <br><input type="text" id="to" style="width: 40%; height: 100px; " name="to" placeholder="To Address" required></input><br><br>
+                <label>Transport method:</label>
+                <input type="text " id="tm" placeholder="Type " name="tm"></input><br><br>
+                <!--label>Date leaving</label>
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div-->
+                <label>Date leaving:</label>
+                <input type="text " id="dl" placeholder="DD/MM/YY " name="dl"></input><br><br>
+                <label>Date arrving -destination:</label>
+                <input type="text " id="da" placeholder="DD/MM/YY " name="da"></input><br><br>
+                <p>&nbsp;<button id="pint" class="btn btn-primary" type="Submit">PRINT</button></p>
+            </form>
+
+            <div id="barcode"></div>
+        </div>
+    </center>
+</body>
+
+</html>
