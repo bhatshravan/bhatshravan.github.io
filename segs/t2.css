@@ -1,0 +1,127 @@
+nav {
+    padding-top:50px;
+    text-align:center;
+}
+nav ul {
+    list-style:none;
+    padding:0;
+    margin:0;
+    display:inline-block;
+    background:#ddd;
+    border-radius:5px;
+}
+nav ul li {
+    float:left;
+    width:150px;
+    height:65px;
+    line-height:65px;
+    position:relative;
+    text-transform:uppercase;
+    font-size:14px;
+    color:rgba(0,0,0,0.7);
+    cursor:pointer;
+}
+nav ul li:hover {
+    background:#ffffff;
+    border-radius:5px;
+}
+
+ul.drop-menu {
+    position:absolute;
+    top:100%;
+    left:0%;
+    width:100%;
+    padding:0;
+}
+
+ul.drop-menu li {
+    background:#666;
+    color:rgba(255,255,255,0.7);
+}
+
+ul.drop-menu li:hover {
+    background:#ffffff;
+    color:#d53114;
+}
+
+ul.drop-menu li:last-child {
+    border-radius:0px 0px 5px 5px;
+}
+
+ul.drop-menu li {
+    display:none;
+}
+ul li:hover > ul.drop-menu li {
+    display:block;
+}
+
+
+//menu 1 -----------
+
+li:hover > ul.drop-menu.menu-1 li {
+    perspective:1000px;
+    opacity:0;
+    animation:name:menu1,duration:300ms,timing-function:ease-in-out,fill-mode:forward;
+}
+
+@keyframes menu1 {
+    0% {
+        opacity:0;
+        transform:rotateY(-90deg) translateY(30px);
+    }
+    100% {
+        opacity:1;
+        transform:rotateY(0deg) translateY(30px);
+    }
+}
+
+.search-form .form-group {
+  float: right !important;
+  transition: all 0.35s, border-radius 0s;
+  width: 32px;
+  height: 32px;
+  background-color: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+.search-form .form-group input.form-control {
+  padding-right: 20px;
+  border: 0 none;
+  background: transparent;
+  box-shadow: none;
+  display:block;
+}
+.search-form .form-group input.form-control::-webkit-input-placeholder {
+  display: none;
+}
+.search-form .form-group input.form-control:-moz-placeholder {
+  /* Firefox 18- */
+  display: none;
+}
+.search-form .form-group input.form-control::-moz-placeholder {
+  /* Firefox 19+ */
+  display: none;
+}
+.search-form .form-group input.form-control:-ms-input-placeholder {
+  display: none;
+}
+.search-form .form-group:hover,
+.search-form .form-group.hover {
+  width: 100%;
+  border-radius: 4px 25px 25px 4px;
+}
+.search-form .form-group span.form-control-feedback {
+  position: absolute;
+  top: -1px;
+  right: -2px;
+  z-index: 2;
+  display: block;
+  width: 34px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  color: #3596e0;
+  left: initial;
+  font-size: 14px;
+}

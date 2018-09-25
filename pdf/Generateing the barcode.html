@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)http://192.168.1.3:8000/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="viewport" content="width=device-width">
+		<title>Generateing the barcode</title>
+
+	</head>
+
+	<body>
+		<h1>Barcode Generation</h1>
+
+		<div>
+			<form action="http://192.168.1.3:8000/generate" method="get" accept-charset="utf-8">
+				<table>
+					<tbody><tr>
+						<td>
+							<input type="text" name="recipientname" id="recipientname" placeholder="Recipient Name" required="">
+						</td>
+						<td>
+							<input type="text" name="sendername" id="sendername" value="" placeholder="Sender Name">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea name="raddress" rows="8" cols="40" placeholder="Reciever&#39;s Address"></textarea>
+						</td>
+						<td>
+							<textarea name="saddress" rows="8" cols="40" placeholder="Sender&#39;s Address"></textarea>
+						</td>
+
+					</tr>
+					<tr>
+						<td> <input type="text" name="recPinCode" id="recPinCode" value="" placeholder="Recipient Pin Code"> </td>
+						<td> <input type="text" name="senPinCode" id="senPinCode" value="" placeholder="Sender Pin Code"> </td>
+					
+					</tr>
+					<tr>
+						<td> <input type="text" name="recPhone" id="recPhone" value="" placeholder="Recipient Phone Number" pattern="[0-9]{10}"></td>
+						<td> <input type="text" name="senPhone" id="senPhone" value="" placeholder="Sender Phone Number" pattern="[0-9]{10}"></td>
+					</tr>
+					<tr>
+						<td>
+							<label for="mailproducts">Type of Service : </label>
+						</td>
+						<td>
+							<select name="mailproducts" id="mailproducts">
+								<option value="LP">Letter Post</option>
+								<option value="PP">Parcel Post</option>
+								<option value="RP">Registered Post</option>
+								<option value="SP">Speed Post</option>
+							</select>
+						</td>
+					</tr>
+					<tr> 
+						<td colspan="2"> <button id="GenretateBarcode" type="submit">Generate</button></td>
+					</tr>
+				</tbody></table>
+			</form>
+		</div>
+	
+
+</body></html>

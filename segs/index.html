@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	body {font-family: "Lato", sans-serif;}
+
+	.tablink {
+		background-color: #555;
+		color: white;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 14px 16px;
+		font-size: 17px;
+		width: 25%;
+	}
+
+	.tablink:hover {
+		background-color: #777;
+	}
+
+	/* Style the tab content */
+	.tabcontent {
+		color: white;
+		display: none;
+		padding: 50px;
+		text-align: center;
+	}
+
+	#London {background-color:red;}
+	#Paris {background-color:green;}
+	#Tokyo {background-color:blue;}
+	#Oslo {background-color:orange;}
+</style>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="t2.css">
+</head>
+<body>
+	<div class="container">
+		<div class="headers">
+			<nav>
+				<ul>
+					<li>London
+						<ul class="drop-menu menu-1">
+							<li>one</li>
+							<li>two</li>
+							<li>three</li>
+							<li>four</li>
+							<li>five</li>
+						</ul>
+					</li>
+					<li>Paris
+						<ul class="drop-menu menu-1">
+							<li>one</li>
+							<li>two</li>
+							<li>three</li>
+							<li>four</li>
+							<li>five</li>
+						</ul>
+					</li>
+					<li>Tokyo
+						<ul class="drop-menu menu-1">
+							<li>one</li>
+							<li>two</li>
+							<li>three</li>
+							<li>four</li>
+							<li>five</li>
+						</ul>
+					</li>
+					<li>Oslo
+						<ul class="drop-menu menu-1">
+							<li>one</li>
+							<li>two</li>
+							<li>three</li>
+							<li>four</li>
+							<li>five</li>
+						</ul>
+					</li>
+					<li>
+						<i class="fa fa-fw fa-search"></i><!-- 
+						<form action="" class="search-form">
+							<div class="form-group has-feedback">
+								<label for="search" class="sr-only">Search</label>
+								<input type="text" class="form-control" name="search" id="search" placeholder="search">
+								<span class="fa fa-fw fa-search"></span>
+							</div>
+						</form>-->
+					</li>
+				</ul>
+			</nav>
+			<hr/>
+
+			<button class="tablink" onclick="openCity('London', this, 'red')" id="t1">London</button>
+			<button class="tablink" onclick="openCity('Paris', this, 'green')" id="t2">Paris</button>
+			<button class="tablink" onclick="openCity('Tokyo', this, 'blue')" id="t3">Tokyo</button>
+			<button class="tablink" onclick="openCity('Oslo', this, 'orange')" id="t4">Oslo</button>
+			<div id="London" class="tabcontent">
+				<h1>London</h1>
+				<p>London is the capital city of England.</p>
+			</div>
+
+			<div id="Paris" class="tabcontent">
+				<h1>Paris</h1>
+				<p>Paris is the capital of France.</p> 
+			</div>
+
+			<div id="Tokyo" class="tabcontent">
+				<h1>Tokyo</h1>
+				<p>Tokyo is the capital of Japan.</p>
+			</div>
+
+			<div id="Oslo" class="tabcontent">
+				<h1>Oslo</h1>
+				<p>Oslo is the capital of Norway.</p>
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+		function openCity(cityName) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+
+			document.getElementById(cityName).style.display = "block";
+			
+
+		}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("t1").click();
+
+$("#t1").hover(function(){
+	openCity('London', this, 'red')
+});
+
+$("#t2").hover(function(){
+	openCity('Paris', this, 'green')
+});
+
+$("#t3").hover(function(){
+	openCity('Tokyo', this, 'blue')
+});
+
+$("#t4").hover(function(){
+	openCity('Oslo', this, 'orange')
+});
+
+</script>
+
+</body>
+</html> 
