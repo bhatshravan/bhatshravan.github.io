@@ -1,0 +1,24 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HBO Stream</title>
+</head>
+<body>
+	<script src="https://cdn.jwplayer.com/libraries/d2UffoZX.js"></script>
+	<div id="myElement" frameborder="0" allowfullscreen></div>
+	<script type="text/JavaScript">
+		var playerInstance = jwplayer("myElement");
+		
+		playerInstance.setup({
+			file:"./playlist.m3u8",
+			width: "100%",
+			autostart: true,
+			mute: false
+		});
+		
+	</script>
+	
+</body>
+</html>
